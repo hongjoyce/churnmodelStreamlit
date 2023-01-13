@@ -75,7 +75,6 @@ if st.button('Predict Churn'):
         
     else:
         score = 5
-
         
     query = np.array([Tenure, CashbackAmount, complain, DaySinceLastOrder, \
                                       WarehouseToHome, NumberOfAddress, score, \
@@ -84,27 +83,20 @@ if st.button('Predict Churn'):
 
     query = query.reshape(1, 10)
     print(query)
-    prediction = int(model.predict(query)[0])
-    if prediction == 1:
-        result = 'Churn'
-    else:
-        result = 'Not Churn'
+    prediction = round(model.predict_proba(query)[0][-1], 3)
     
-    st.subheader("This customer will " + result + " next month")
+    st.subheader("The churn probability of this customer next month is " + result)
 
     shap.initjs()
 
     #set the tree explainer as the model of the pipeline
-    explainer = shap.TreeExplainer(model[-1])
-
-    #apply the preprocessing to x_test
-    observation = model[:-1].transform(query)
+    explainer = shap.TreeExplainer(model)
 
     #get Shap values from preprocessed data
-    shap_values = explainer.shap_values(observation)
+    shap_values = explainer.shap_values(query)
 
     #plot the feature importance
-    fig = shap.force_plot(explainer.expected_value, shap_values, observation, matplotlib=True,show=False, \
+    fig = shap.force_plot(explainer.expected_value, shap_values, query, matplotlib=True,show=False, \
                           feature_names=['Tenure', 'CashbackAmount', 'Complain', 'DaySinceLastOrder', \
                                       'WarehouseToHome', 'NumberOfAddress', 'SatisfactionScore', \
                                       'OrderAmountHikeFromlastYear', 'OrderCount', 'NumberOfDeviceRegistered'])
