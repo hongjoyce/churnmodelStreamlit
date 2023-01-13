@@ -5,3 +5,5 @@ IPython==7.31.1
 matplotlib==3.5.3
 shap==0.41.0
 xgboost==1.7.0
+numpy==1.22.3
+
