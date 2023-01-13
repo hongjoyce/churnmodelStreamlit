@@ -85,7 +85,7 @@ if st.button('Predict Churn'):
     print(query)
     prediction = round(model.predict_proba(query)[0][-1], 3)
     
-    st.subheader("The churn probability of this customer next month is " + result)
+    st.subheader("The churn probability of this customer next month is " + prediction)
 
     shap.initjs()
 
