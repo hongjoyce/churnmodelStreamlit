@@ -83,7 +83,7 @@ if st.button('Predict Churn'):
 
     query = query.reshape(1, 10)
     print(query)
-    prediction = round(model.predict_proba(query)[0][-1], 3)
+    prediction = str(round(model.predict_proba(query)[0][-1], 3))
     
     st.subheader("The churn probability of this customer next month is " + prediction)
 
