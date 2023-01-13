@@ -84,7 +84,7 @@ if st.button('Predict Churn'):
 
     query = query.reshape(1, 10)
     print(query)
-    prediction = str(int(np.exp(model.predict(query)[0])))
+    prediction = int(model.predict(query)[0])
     if prediction == 1:
         result = 'Churn'
     else:
