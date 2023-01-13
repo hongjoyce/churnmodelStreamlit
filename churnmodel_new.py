@@ -14,7 +14,6 @@ import pandas as pd
 import shap
 import matplotlib.pyplot as plt
 
-base="dark"
 
 #load the model
 
