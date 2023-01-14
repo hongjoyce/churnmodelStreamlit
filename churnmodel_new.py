@@ -15,7 +15,8 @@ import shap
 import matplotlib.pyplot as plt
 
 
-#load the model
+#load the model and data
+df = pd.read_csv("train_impute.csv")
 
 model = pickle.load(open("model.pkl","rb"))
 
@@ -90,7 +91,7 @@ if st.button('Predict Churn'):
     shap.initjs()
 
     #set the tree explainer as the model of the pipeline
-    explainer = shap.TreeExplainer(model)
+    explainer = shap.TreeExplainer(model, df, model_output="probability")
 
     #get Shap values from preprocessed data
     shap_values = explainer.shap_values(query)
