@@ -24,7 +24,7 @@ st.title("Customer Churn Perdiction")
 st.subheader('E-Commerce')
 
 #Tenure
-Tenure = st.slider('Tenure', 0,70, 5)
+Tenure = st.slider('Tenure (Month)', 0,70, 5)
 
 #CashbackAmount
 CashbackAmount = st.number_input(label='Cash back Amount per month', value=200.00)
